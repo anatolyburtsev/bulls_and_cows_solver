@@ -120,6 +120,8 @@ def reduce_available_list_with_bulls_and_cows(number, bulls, cows, available_num
     check all numbers in list for match with pattern
     >>> reduce_available_list_with_bulls_and_cows(1234, 1, 2, [1234,1235, 1326,2318])
     [1326]
+    >>> reduce_available_list_with_bulls_and_cows(1620, 1, 1, [1620, 1623, 9140, 9143])
+    [9140]
     """
     assert type(available_numbers_list) == list
     result_list = []
@@ -130,17 +132,13 @@ def reduce_available_list_with_bulls_and_cows(number, bulls, cows, available_num
 
 
 def start_game():
-    #my_number = generate_number_without_repetition()
     current_available_list = generate_available_integers_list()
-    current_available_list = [1620, 1623, 9140, 9143]
     steps = 0
-    while len(current_available_list) > 1:
+    while len(current_available_list) > 0:
         steps += 1
-        print("\nnow " + str(len(current_available_list)) + " numbers in list")
-        print(current_available_list[:10])
-        # ask me
-        number = random.choice(current_available_list) #int(input("Enter number:"))
-        print(number)
+        print("\nnow " + str(len(current_available_list)) + " numbers in list of available numbers")
+        number = random.choice(current_available_list)
+        print("I guess it's number: " + str(number))
         try:
             bulls = int(input("bulls:"))
             cows = int(input("cows:"))
@@ -158,12 +156,13 @@ def start_game():
             logging.info("win in " + str(steps) + " steps!")
             return True
 
+        current_available_list.remove(number)
         current_available_list = reduce_available_list_with_bulls_and_cows(number, bulls, cows, current_available_list)
+        if len(current_available_list) == 1:
+            print("YES!!! I know!!! I know!!!")
+            print("It's number: " + str(current_available_list[0]))
     print("It's looks like somebody tried to cheat me! ATATATA")
 
 if __name__ == '__main__':
-    #print( compare_two_numbers(1234, 9214) )
-    #print (generate_available_integers_list())
     doctest.testmod()
     start_game()
-    #print(compare_two_numbers(5148, 9140))
