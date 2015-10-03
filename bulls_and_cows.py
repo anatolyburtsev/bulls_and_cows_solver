@@ -151,7 +151,7 @@ def start_game():
             continue
 
         if bulls == len(str(number)):
-            print("YES!!! I'm sexy and I know it!")
+            print("\nYES!!! I'm sexy and I know it!")
             print("win in " + str(steps) + " steps!")
             logging.info("win in " + str(steps) + " steps!")
             return True
@@ -159,9 +159,10 @@ def start_game():
         current_available_list.remove(number)
         current_available_list = reduce_available_list_with_bulls_and_cows(number, bulls, cows, current_available_list)
         if len(current_available_list) == 1:
-            print("YES!!! I know!!! I know!!!")
+            print("\nYES!!! I know!!! I know!!!")
             print("It's number: " + str(current_available_list[0]))
             logging.info("win in " + str(steps) + " steps!")
+            return True
     print("It's looks like somebody tried to cheat me! ATATATA")
 
 if __name__ == '__main__':
