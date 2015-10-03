@@ -133,9 +133,8 @@ def reduce_available_list_with_bulls_and_cows(number, bulls, cows, available_num
 
 def start_game():
     current_available_list = generate_available_integers_list()
-    steps = 0
+    steps = 1
     while len(current_available_list) > 0:
-        steps += 1
         print("\nnow " + str(len(current_available_list)) + " numbers in list of available numbers")
         number = random.choice(current_available_list)
         print("I guess it's number: " + str(number))
@@ -163,6 +162,7 @@ def start_game():
             print("It's number: " + str(current_available_list[0]))
             logging.info("win in " + str(steps) + " steps!")
             return True
+        steps += 1
     print("It's looks like somebody tried to cheat me! ATATATA")
 
 if __name__ == '__main__':
