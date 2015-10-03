@@ -161,6 +161,7 @@ def start_game():
         if len(current_available_list) == 1:
             print("YES!!! I know!!! I know!!!")
             print("It's number: " + str(current_available_list[0]))
+            logging.info("win in " + str(steps) + " steps!")
     print("It's looks like somebody tried to cheat me! ATATATA")
 
 if __name__ == '__main__':
