@@ -132,6 +132,7 @@ def reduce_available_list_with_bulls_and_cows(number, bulls, cows, available_num
 def start_game():
     #my_number = generate_number_without_repetition()
     current_available_list = generate_available_integers_list()
+    current_available_list = [1620, 1623, 9140, 9143]
     steps = 0
     while len(current_available_list) > 1:
         steps += 1
@@ -140,12 +141,23 @@ def start_game():
         # ask me
         number = random.choice(current_available_list) #int(input("Enter number:"))
         print(number)
-        bulls = int(input("bulls:"))
+        try:
+            bulls = int(input("bulls:"))
+            cows = int(input("cows:"))
+        except ValueError:
+            print("don't try to cheat me, enter just numbers!")
+            continue
+
+        if bulls + cows > len(str(number)) or bulls < 0 or cows < 0:
+            print("don't try to cheat me, enter correct numbers of bulls and cows!")
+            continue
+
         if bulls == len(str(number)):
             print("YES!!! I'm sexy and I know it!")
             print("win in " + str(steps) + " steps!")
+            logging.info("win in " + str(steps) + " steps!")
             return True
-        cows = int(input("cows:"))
+
         current_available_list = reduce_available_list_with_bulls_and_cows(number, bulls, cows, current_available_list)
     print("It's looks like somebody tried to cheat me! ATATATA")
 
@@ -154,4 +166,4 @@ if __name__ == '__main__':
     #print (generate_available_integers_list())
     doctest.testmod()
     start_game()
-    #print ( compare_two_numbers(9142, 8059))
+    #print(compare_two_numbers(5148, 9140))
